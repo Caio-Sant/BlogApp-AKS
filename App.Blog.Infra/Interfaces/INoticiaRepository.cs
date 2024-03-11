@@ -9,7 +9,7 @@ namespace App.Blog.Infra.Interfaces
         Task<Noticia> ConsultarPorIdAsync(int Id);
         Task<int> IncluirAsync(Noticia noticia);
 
-        public bool Adicionar(Noticia noticia);
-        public bool Excluir(int id);
+        bool Adicionar(Noticia noticia);
+        void Excluir(int id);
     }
 }

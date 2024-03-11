@@ -47,9 +47,12 @@ namespace App.Blog.Application.Services
             return _repository.Adicionar(noticia);
         }
 
-        public bool Excluir(int id)
+        public async Task Excluir(int id)
         {
-            return _repository.Excluir(id);
+            var noticia = await ConsultarPorIdAsync(id);
+            if (noticia == null)
+                throw new Exception("Notícia não encontrada");
+            _repository.Excluir(id);
         }
 
     }

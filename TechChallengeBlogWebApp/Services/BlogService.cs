@@ -86,6 +86,13 @@ namespace TechChallengeBlogWebApp.Services
             }
         }
 
+        public async Task<bool> ExcluirAsync(int id)
+        {
+            await AutenticarJwtAsync();
+            HttpResponseMessage resposta = await _httpClient.DeleteAsync($"{ApiBlogConfig.ExcluirNoticia}/{id}");
+            return resposta.StatusCode == System.Net.HttpStatusCode.OK;
+        }
+
         public async Task IncluirAsync(NoticiaModel model)
         {
             await AutenticarJwtAsync();

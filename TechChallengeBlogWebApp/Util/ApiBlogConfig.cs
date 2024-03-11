@@ -11,5 +11,6 @@ namespace TechChallengeBlogWebApp.Util
         public string PesquisarNoticiaPorId { get; set; }
         public string Incluir { get; set; }
         public string Atualizar { get; set; }
+        public string ExcluirNoticia { get; set; }
     }
 }

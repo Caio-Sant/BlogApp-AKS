@@ -53,24 +53,12 @@ namespace App.Blog.Infra.Repository
             }
         }
 
-        public bool Excluir(int Id)
+        public void Excluir(int Id)
         {
-            var noticia = _context.Noticias.FirstOrDefault(c => c.Id.Equals(Id));
+            var noticia = _context.Noticias.FirstOrDefault(c => c.Id == Id);
 
-            try
-            {
-                if (Id != noticia.Id)
-                {
-                    return false;
-                }
-                _context.Entry(noticia).State = EntityState.Modified;
-                _context.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            _context.Entry(noticia).State = EntityState.Deleted;
+            _context.SaveChanges();
         }
 
     }

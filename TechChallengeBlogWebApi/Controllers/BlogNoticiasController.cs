@@ -3,6 +3,7 @@ using App.Blog.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -63,6 +64,28 @@ namespace TechChallengeBlogWebApi.Controllers
         {
             int retorno = await _service.IncluirAsync(noticia);
             return retorno.Equals(0) ? NoContent() : Ok(noticia);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [SwaggerOperation(Summary = "Endpoint para excluir uma notícia presente na base de dados.", Description = "Endpoint para excluir uma notícia presente na base de dados.")]
+        [SwaggerResponse(200, "OK", typeof(string))]
+        [SwaggerResponse(204)]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(500)]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            try
+            {
+                await _service.Excluir(id);
+                return Ok("Notícia removida com sucesso!");
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
         }
 
         [HttpPut]
